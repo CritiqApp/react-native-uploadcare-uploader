@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(UploadcareUploader, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
+RCT_EXTERN_METHOD(upload:(NSString*)key filePath:(NSString*)path mimeType:(NSString*)type
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 

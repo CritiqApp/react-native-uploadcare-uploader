@@ -1,0 +1,6 @@
+module Pods_UploadcareUploader {
+  umbrella header "Pods-UploadcareUploader-umbrella.h"
+
+  export *
+  module * { export * }
+}

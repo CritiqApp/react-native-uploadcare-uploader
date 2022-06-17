@@ -17,6 +17,6 @@ const UploadcareUploader = NativeModules.UploadcareUploader
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return UploadcareUploader.multiply(a, b);
+export function upload(key: string, path: string, mimeType: string) {
+  return UploadcareUploader.upload(key, path, mimeType)
 }
