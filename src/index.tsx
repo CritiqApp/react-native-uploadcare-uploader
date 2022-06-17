@@ -18,5 +18,5 @@ const UploadcareUploader = NativeModules.UploadcareUploader
     );
 
 export function upload(key: string, path: string, mimeType: string) {
-  return UploadcareUploader.upload(key, path, mimeType)
+  return UploadcareUploader.upload(key, path, mimeType, (a, b) => console.log(a, b))
 }

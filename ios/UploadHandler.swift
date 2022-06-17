@@ -36,6 +36,7 @@ class UploadHandler: NSObject {
     // MARK - Callbacks
     public var errorCallback: ((_ type: String, _ description: String, _ error: Error) -> Void)?
     public var successCallback: ((_ uuid: String) -> Void)?
+    public var progressCallback: ((_ current: Int64, _ total: Int64) -> Void)?
     
     init(_ key: String, path: String, mimeType: String) {
         self.key = key
@@ -191,6 +192,7 @@ class UploadHandler: NSObject {
                 }
                 
                 if response.statusCode < 200 || response.statusCode >= 300 {
+                    print(String(data: data!, encoding: .utf8))
                     self.errorCallback?("direct", "server responded with a bad status code", UploadError.network)
                     return
                 }

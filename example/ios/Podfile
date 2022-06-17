@@ -7,8 +7,6 @@ target 'UploadcareUploaderExample' do
   config = use_native_modules!
   use_react_native!(:path => config["reactNativePath"])
   
-  pod 'Alamofire', '5.6.1'
-  pod 'Uploadcare', git: 'https://github.com/uploadcare/uploadcare-swift', :branch => 'develop'
   pod 'react-native-uploadcare-uploader', :path => '../..'
 
   # Enables Flipper.
