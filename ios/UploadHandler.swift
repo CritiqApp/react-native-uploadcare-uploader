@@ -279,7 +279,7 @@ class UploadHandler: NSObject {
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let response = response as? HTTPURLResponse else {
-                    self.errorCallback?("complete multipart", "multipart complete request failed", UploadError.network)
+                    self.errorCallback?("complete multipart", "multipart response is not HTTP", UploadError.network)
                     return
                 }
                 
@@ -364,7 +364,8 @@ extension UploadHandler: URLSessionDelegate, URLSessionDataDelegate, URLSessionD
                 // If session is multipart, tell complete the upload
                 if self.uploadMode == .multipart {
                     let session = URLSession.shared
-                    self.completeMultipart(session, uuid: self.uuid!).resume()
+                    let task = self.completeMultipart(session, uuid: self.uuid!)
+                    task.resume()
                 }
                 
             }

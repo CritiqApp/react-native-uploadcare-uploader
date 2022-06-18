@@ -57,6 +57,10 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+
+}
+
+-(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler{
 }
 
 @end
