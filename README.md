@@ -23,10 +23,15 @@ import Uploader from "react-native-uploadcare-uploader";
 
 // ...
 
-// Note - if filePath is prefixed with "file://"
-// strip this with filePath.replace('file://', '')
-const handleUpload = React.useCallback((filePath, mimeType) => {
-    Uploader.upload("uploadcare public key", filePath, mimeType)
+// Note - if uri is prefixed with "file://"
+// strip this with uri.replace('file://', '')
+const handleUpload = React.useCallback((filePath, uri, mimeType) => {
+    Uploader.upload("uploadcare public key", {
+        uri, mimeType
+    }, {
+        onProgress: (current, total) => { /*...*/ },
+        metadata: { internalId: "sdasdas", description: "more data..." },
+    })
 }, [])
 ```
 

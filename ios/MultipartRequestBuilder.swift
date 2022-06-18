@@ -25,7 +25,19 @@ class MultipartRequestBuilder {
 
         self.request.httpBody = data
     }
-
+    
+    func addMultiformData(_ newData: Data, forName name: String, mimeType: String) {
+        var data = self.request.httpBody ?? Data()
+        
+        data.append("--\(boundary)\r\n".data(using: .utf8) ?? Data())
+        data.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(name)\"\r\n".data(using: .utf8) ?? Data())
+        data.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
+        data.append(newData)
+        data.append("\r\n".data(using: .utf8) ?? Data())
+        
+        self.request.httpBody = data
+    }
+    
     func finalize() -> URLRequest {
         var data = self.request.httpBody ?? Data()
         data.append("--\(boundary)--\r\n".data(using: .utf8) ?? Data())

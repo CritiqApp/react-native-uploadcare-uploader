@@ -40,13 +40,13 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"UploadcareUploaderExample"
                                             initialProperties:nil];
-
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+    
   return YES;
 }
 
@@ -58,13 +58,5 @@ static void InitializeFlipper(UIApplication *application) {
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
-
-
-/**- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
-{
-  NSLog(@"Something To Print");
-    // save the completionHandler here
-}*/
-
 
 @end
