@@ -15,7 +15,7 @@ export default function App() {
     }).then(response => {
       const file = response.assets ? response.assets[0] : null
       if (file) {
-        Uploader.upload('45abe1dd3ff00425e6bd',
+        Uploader.upload("some-id",
           {
             uri: file.uri!.replace('file://', ''),
             mimeType: 'video/mp4',
