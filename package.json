@@ -1,6 +1,6 @@
 {
   "name": "react-native-uploadcare-uploader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React-Native wrapper for Uploadcares Swift library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
