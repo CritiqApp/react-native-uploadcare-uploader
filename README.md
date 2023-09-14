@@ -12,6 +12,19 @@ or
 yarn react-native-uploadcare-uploader
 ```
 
+### Android
+
+You will need to define the service in your AndroidManifest. You will also need to allow `FOREGROUND-SERVICE` permissions.
+
+```diff
+<manifest.... >
++  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <application ...>
++    <service android:name="com.reactnativeuploadcareuploader.UploadcareUploaderService" />
+  </application>
+</manifest>
+```
+
 # Dependencies
 
 None

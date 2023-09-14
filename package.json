@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/nichocm/react-native-uploadcare-uploader",
+  "repository": "https://github.com/CritiqApp/react-native-uploadcare-uploader",
   "author": "Nicho <nicho@critiq.com> (https://github.com/nichocm)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nichocm/react-native-uploadcare-uploader/issues"
+    "url": "https://github.com/CritiqApp/react-native-uploadcare-uploader/issues"
   },
-  "homepage": "https://github.com/nichocm/react-native-uploadcare-uploader#readme",
+  "homepage": "https://github.com/CritiqApp/react-native-uploadcare-uploader#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

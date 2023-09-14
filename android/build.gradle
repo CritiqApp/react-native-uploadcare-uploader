@@ -8,6 +8,7 @@ buildscript {
 
         dependencies {
             classpath 'com.android.tools.build:gradle:3.5.3'
+            implementation("com.squareup.okhttp3:okhttp:4.10.0")
         }
     }
 }

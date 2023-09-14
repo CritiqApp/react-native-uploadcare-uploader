@@ -26,6 +26,12 @@
 /* Begin PBXFileReference section */
 		0CF226A491F24A068A10427D /* Pods-UploadcareUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UploadcareUploader.release.xcconfig"; path = "Target Support Files/Pods-UploadcareUploader/Pods-UploadcareUploader.release.xcconfig"; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libUploadcareUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUploadcareUploader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		678DA0832AB2155E00F310AA /* UploadcareUploader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadcareUploader.m; sourceTree = "<group>"; };
+		678DA0842AB2155E00F310AA /* UploadcareUploader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UploadcareUploader-Bridging-Header.h"; sourceTree = "<group>"; };
+		678DA0852AB2155E00F310AA /* UploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadHandler.swift; sourceTree = "<group>"; };
+		678DA0862AB2155E00F310AA /* UploadcareUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadcareUploader.swift; sourceTree = "<group>"; };
+		678DA0872AB2155F00F310AA /* UploadcareUploader.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = UploadcareUploader.xcworkspace; sourceTree = "<group>"; };
+		678DA0882AB2155F00F310AA /* MultipartRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartRequestBuilder.swift; sourceTree = "<group>"; };
 		9D0502F1FAFDA023EA3D6EF5 /* Pods-UploadcareUploader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UploadcareUploader.debug.xcconfig"; path = "Target Support Files/Pods-UploadcareUploader/Pods-UploadcareUploader.debug.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* UploadcareUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareUploader.m; sourceTree = "<group>"; };
 		B5C21C81551F96B038958309 /* libPods-UploadcareUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UploadcareUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,8 +63,14 @@
 			isa = PBXGroup;
 			children = (
 				F4FF95D6245B92E800C19C63 /* UploadcareUploader.swift */,
+				678DA0882AB2155F00F310AA /* MultipartRequestBuilder.swift */,
+				678DA0842AB2155E00F310AA /* UploadcareUploader-Bridging-Header.h */,
 				B3E7B5891CC2AC0600A0062D /* UploadcareUploader.m */,
 				F4FF95D5245B92E700C19C63 /* UploadcareUploader-Bridging-Header.h */,
+				678DA0832AB2155E00F310AA /* UploadcareUploader.m */,
+				678DA0862AB2155E00F310AA /* UploadcareUploader.swift */,
+				678DA0872AB2155F00F310AA /* UploadcareUploader.xcworkspace */,
+				678DA0852AB2155E00F310AA /* UploadHandler.swift */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				CFB940879F85A228587DB383 /* Pods */,
 				95D388E777F5C1DDE755D044 /* Frameworks */,
