@@ -53,11 +53,9 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
     private final OkHttpClient httpClient = new OkHttpClient();
     private HandlerThread handlerThread;
     private Handler handler;
-    private InputStream inputStream;
     private Uri uri;
     private String key;
     private String sessionId;
-    private String extension;
     private int size;
     private String mimeType;
     private HashMap<String, String> metaData;
@@ -73,14 +71,13 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
   /**
    * Handle uploading directly to Uploadcare (without multipart)
    */
-  public void uploadDirect() throws IOException {
+  public void uploadDirect() throws IOException, JSONException {
+        String name = this.sessionId;
         MultipartBody.Builder builder = new MultipartBody.Builder()
+          .setType(MultipartBody.FORM)
           .addFormDataPart("UPLOADCARE_PUB_KEY", this.key)
           .addFormDataPart("UPLOADCARE_STORE", "auto")
-          .addFormDataPart("filename", this.sessionId + "." + this.extension)
-          .addFormDataPart("size", size + "")
-          .addFormDataPart("content_type", this.mimeType)
-          .addFormDataPart("part_size", ChunkSize + "");
+          .addFormDataPart("filename", name);
 
         for (Map.Entry<String, String> entry: this.metaData.entrySet()) {
             if (entry.getValue() == null) {
@@ -90,19 +87,34 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
             }
         }
 
-    }
+        byte[] chunk = new byte[this.size];
+        getFileStream().read(chunk);
+        builder.addFormDataPart("file", name, new ChunkRequestBody(chunk, mimeType, this));
+
+        Request request = new Request.Builder()
+          .url(DirectEndpoint)
+          .post(builder.build())
+          .build();
+
+        Response response = this.httpClient.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        JSONObject json = new JSONObject(response.body().string());
+        this.uuid = json.getString("file");
+        notifyUUID();
+        notifyDone();
+  }
 
   /**
    * Start a multipart upload
    * @throws IOException
    * @throws Exception
    */
-  public void startMultipart() throws IOException, Exception {
+  public void startMultipart() throws IOException, JSONException {
 
         FormBody.Builder builder = new FormBody.Builder()
           .add("UPLOADCARE_PUB_KEY", this.key)
           .add("UPLOADCARE_STORE", "auto")
-          .add("filename", this.sessionId + "." + this.extension)
+          .add("filename", this.sessionId)
           .add("size", size + "")
           .add("content_type", this.mimeType)
           .add("part_size", ChunkSize + "");
@@ -120,8 +132,7 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
             .post(builder.build())
             .build();
 
-        Response response = null;
-        response = httpClient.newCall(request).execute();
+        Response response = httpClient.newCall(request).execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         JSONObject json = new JSONObject(response.body().string());
         this.uuid = json.getString("uuid");
@@ -152,7 +163,7 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
                     Request request = new Request.Builder()
                       .url(part)
                       .addHeader("Content-Type", "application/octet-stream")
-                      .put(new ChunkRequestBody(chunk, UploadcareUploaderService.this))
+                      .put(new ChunkRequestBody(chunk, "application/octet-stream", UploadcareUploaderService.this))
                       .build();
 
                     Response response = UploadcareUploaderService.this.httpClient.newCall(request).execute();
@@ -231,6 +242,7 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
                 this.uploadDirect();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             uploadError = true;
         }
         notifyDone();
@@ -291,7 +303,6 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
           createNotificationChannel();
         }
         startForeground(notificationId, createNotification());
-        System.out.println("NOTIFICATION_ID: " + notificationId);
 
         String path = intent.getStringExtra("path");
         this.key = intent.getStringExtra("key");
@@ -301,21 +312,15 @@ public class UploadcareUploaderService extends Service implements Runnable, Uplo
 
         InputStream stream = null;
         try {
-            this.uri = Uri.parse(path);
+            this.uri = Uri.parse("file://" + path);
             stream = this.getFileStream();
             this.size = stream.available();
-
-            String[] split = path.split(".");
-            if (split.length > 0) {
-                this.extension = split[split.length - 1];
-            } else {
-                this.extension = "";
-            }
 
             this.handler = new Handler(handlerThread.getLooper());
             this.handler.post(this);
 
         } catch (Exception e) {
+            e.printStackTrace();
             uploadError = true;
         }
 

@@ -15,9 +15,11 @@ public class ChunkRequestBody extends RequestBody {
 
     private byte[] chunk;
     private UploadProgressListener listener;
+    private String type;
 
-    public ChunkRequestBody(byte[] chunk, UploadProgressListener listener) {
+    public ChunkRequestBody(byte[] chunk, String type, UploadProgressListener listener) {
         this.chunk = chunk;
+        this.type = type;
         this.listener = listener;
     }
 
@@ -36,7 +38,7 @@ public class ChunkRequestBody extends RequestBody {
     @Nullable
     @Override
     public MediaType contentType() {
-        return MediaType.parse("application/octet-stream");
+        return MediaType.parse(type);
     }
 
     @Override

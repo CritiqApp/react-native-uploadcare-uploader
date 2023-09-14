@@ -11,7 +11,7 @@ export default function App() {
 
   const handleUpload = React.useCallback(() => {
     launchImageLibrary({
-      mediaType: 'video',
+      mediaType: 'image',
     }).then((response) => {
       const file = response.assets ? response.assets[0] : null;
       if (file) {
