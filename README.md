@@ -18,9 +18,9 @@ You will need to define the service in your AndroidManifest. You will also need 
 
 ```diff
 <manifest.... >
-+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
++ <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <application ...>
-+    <service android:name="com.reactnativeuploadcareuploader.UploadcareUploaderService" />
++   <service android:name="com.reactnativeuploadcareuploader.UploadcareUploaderService" />
   </application>
 </manifest>
 ```
